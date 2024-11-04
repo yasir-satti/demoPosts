@@ -1,5 +1,7 @@
 package dev.danvega.post.controller;
 
+import dev.danvega.post.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,9 @@ public class PostController {
 
     private List<Post> posts = new ArrayList<>();
 
+    @Autowired
+    private PostRepository postRepository;
+
     void setup() {
         posts = List.of(
                 new Post(1, 1, "Hello, World!", "This is my first post.", null),
@@ -25,7 +30,8 @@ public class PostController {
 
     @GetMapping("")
     List<Post> findAll() {
-        setup();
-        return posts;
+/*        setup();
+        return posts;*/
+        return postRepository.findAll();
     }
 }
